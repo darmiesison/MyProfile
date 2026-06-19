@@ -2,18 +2,18 @@
 
 /* --- Color Palette --- */
 :root {
-    --primary-color: #1f204a;
-    --secondary-color: #987cc1;
-    --accent-color: #78639c;
-    --highlight-color: #ce94b8;
-    --text-dark: #111827;
-    --text-muted: #52525b;
-    --bg-page: #f8f8ff;
+    --primary-color: #3f2b7d;
+    --secondary-color: #7d5fb6;
+    --accent-color: #6b40c3;
+    --highlight-color: #b58de8;
+    --text-dark: #1f1f3d;
+    --text-muted: #5b597d;
+    --bg-page: #fdfbfd;
     --bg-surface: #ffffff;
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 8px 24px rgba(31, 41, 55, 0.08);
-    --shadow-md: 0 12px 32px rgba(31, 41, 55, 0.12);
-    --shadow-lg: 0 18px 40px rgba(31, 41, 55, 0.16);
+    --border-color: #e8e1f7;
+    --shadow-sm: 0 10px 28px rgba(101, 65, 167, 0.08);
+    --shadow-md: 0 16px 40px rgba(101, 65, 167, 0.12);
+    --shadow-lg: 0 22px 55px rgba(101, 65, 167, 0.16);
 }
 
 * {
@@ -41,13 +41,29 @@ select {
     font: inherit;
 }
 
+.project-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    color: var(--accent-color);
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.project-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
 /* --- Splash Screen --- */
 .splash-body {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, rgba(107, 64, 195, 0.12) 0%, rgba(189, 167, 235, 0.2) 100%);
 }
 
 .splash-content {
@@ -61,13 +77,13 @@ select {
 .splash-content h1 {
     font-family: 'Merriweather', serif;
     font-size: 2.5rem;
-    color: #f8fafc;
+    color: var(--primary-color);
     font-weight: 700;
 }
 
 .splash-content p {
     font-size: 1rem;
-    color: rgba(248, 250, 252, 0.75);
+    color: var(--text-muted);
 }
 
 .cat-splash {
@@ -155,10 +171,10 @@ select {
 
 /* --- Hero Section --- */
 .hero-section {
-    background: linear-gradient(135deg, #211a4f 0%, #3b2b8c 100%);
-    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(107, 64, 195, 0.12), rgba(189, 167, 235, 0.12));
+    padding: 5.5rem 2rem;
     text-align: center;
-    color: white;
+    color: var(--text-dark);
 }
 
 .hero-content {
@@ -174,26 +190,27 @@ select {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.12);
+    border: 3px solid rgba(107, 64, 195, 0.16);
     object-fit: cover;
-    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.28);
+    box-shadow: 0 18px 35px rgba(107, 64, 195, 0.16);
 }
 
 .hero-name {
     font-family: 'Merriweather', serif;
     font-size: 2.6rem;
     font-weight: 700;
+    color: var(--primary-color);
 }
 
 .hero-title {
     font-size: 1.2rem;
-    color: var(--highlight-color);
+    color: var(--accent-color);
     font-weight: 600;
 }
 
 .hero-subtitle {
     font-size: 1rem;
-    color: rgba(248, 250, 252, 0.82);
+    color: var(--text-muted);
     max-width: 680px;
 }
 
@@ -206,6 +223,17 @@ select {
 .section-container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title {
@@ -339,46 +367,56 @@ select {
 /* --- Project Card --- */
 .project-card {
     background-color: var(--bg-surface);
-    border-radius: 18px;
-    padding: 3rem;
-    box-shadow: var(--shadow-md);
-    border-left: 5px solid var(--highlight-color);
-}
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(125, 95, 182, 0.14);
+    }
 
-/* Projects grid for featured projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
+    /* Projects grid for featured projects */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
 
-.project-title {
-    font-family: 'Merriweather', serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
+    @media (max-width: 1200px) {
+        .projects-grid {
+            grid-template-columns: repeat(2, minmax(220px, 1fr));
+        }
+    }
 
-.project-description {
-    color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 
-.project-tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
+    .project-title {
+        font-family: 'Merriweather', serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
 
-.tech-badge {
-    background-color: rgba(15, 95, 143, 0.12);
-    color: var(--secondary-color);
-    padding: 0.55rem 0.95rem;
-    border-radius: 999px;
+    .project-description {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.75;
+        margin-bottom: 1.4rem;
+    }
+
+    .project-tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-badge {
+        background-color: rgba(125, 95, 182, 0.12);
+        color: var(--primary-color);
     font-size: 0.85rem;
     font-weight: 600;
 }
@@ -442,21 +480,24 @@ select {
 /* --- Drama Cards --- */
 .interests-section {
     padding: 4rem 2rem;
-    background-color: var(--bg-surface);
+    background-color: var(--bg-page);
     border-top: 1px solid var(--border-color);
 }
 
 .interests-section:nth-child(even) {
-    background-color: var(--bg-page);
+    background-color: #f9f5ff;
 }
 
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    justify-items: center;
 }
 
 .drama-card {
+    width: 100%;
+    max-width: 320px;
     background-color: var(--bg-surface);
     border-radius: 18px;
     overflow: hidden;
@@ -472,9 +513,10 @@ select {
 
 .drama-card img {
     width: 100%;
-    height: 440px;
+    height: 450px;
     object-fit: cover;
     background-color: #f8f8ff;
+    border-bottom: 1px solid rgba(125, 95, 182, 0.12);
 }
 
 .drama-card p {
@@ -482,23 +524,62 @@ select {
     font-weight: 600;
     color: var(--primary-color);
     text-align: center;
-    padding: 1.5rem;
+    padding: 1.25rem 1rem;
     margin: 0;
 }
 
+
 /* --- Footer --- */
 .footer {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    text-align: center;
-    padding: 2rem;
+    background-color: rgba(63, 43, 125, 0.08);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(125, 95, 182, 0.18);
+    color: var(--text-dark);
+    padding: 2rem 1.5rem;
     margin-top: 2rem;
 }
 
-.footer-content p {
-    margin: 0.5rem 0;
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.footer-brand,
+.footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+}
+
+.footer-brand p,
+.footer-meta p {
+    margin: 0;
     font-size: 0.95rem;
-    opacity: 0.85;
+    color: var(--text-muted);
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
 }
 
 .heart {
