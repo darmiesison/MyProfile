@@ -33,6 +33,7 @@ async function connectToDatabase() {
 }
 
 module.exports = async (req, res) => {
+  // Allow only POST
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ success: false, message: 'Method not allowed.' });
@@ -61,12 +62,26 @@ module.exports = async (req, res) => {
   };
 
   try {
+    // Helpful debug log for deployments
+    console.log('contact function received payload:', { name, email, contactNo });
+
     const { db } = await connectToDatabase();
     const contacts = db.collection(collectionName);
     await contacts.insertOne(contactDoc);
     return res.status(200).json({ success: true, message: 'Message Sent Successfully' });
   } catch (error) {
-    console.error('Vercel contact function error:', error);
+    console.error('Vercel contact function error:', error && error.message ? error.message : error);
+
+    // If DEBUG_CONTACT=true in Vercel env, return detailed error (temporary for debugging only)
+    if (String(process.env.DEBUG_CONTACT || '').toLowerCase() === 'true') {
+      return res.status(500).json({
+        success: false,
+        message: 'Unable to send your message. Debug info included.',
+        error: error && error.message ? error.message : String(error),
+        stack: error && error.stack ? error.stack : undefined,
+      });
+    }
+
     return res.status(500).json({ success: false, message: 'Unable to send your message. Please try again later.' });
   }
 };
