@@ -1,4 +1,6 @@
 const { MongoClient } = require('mongodb');
+const fs = require('fs').promises;
+const path = require('path');
 
 const uri = process.env.MONGO_URI;
 const dbName = process.env.MONGO_DB_NAME || 'Profiling';
@@ -50,6 +52,32 @@ async function connectToDatabase() {
   return { client, db };
 }
 
+async function saveMessageFallback(contactDoc) {
+  try {
+    const dataDir = path.join(__dirname, '..', 'data');
+    const filePath = path.join(dataDir, 'contact-messages.json');
+    await fs.mkdir(dataDir, { recursive: true });
+
+    let arr = [];
+    try {
+      const existing = await fs.readFile(filePath, 'utf8');
+      arr = JSON.parse(existing || '[]');
+      if (!Array.isArray(arr)) arr = [];
+    } catch (e) {
+      // File may not exist or be invalid; start fresh
+      arr = [];
+    }
+
+    arr.push(contactDoc);
+    await fs.writeFile(filePath, JSON.stringify(arr, null, 2), 'utf8');
+    console.log('Saved contact to fallback file:', filePath);
+    return true;
+  } catch (e) {
+    console.error('Failed to save fallback message:', e && e.message ? e.message : e);
+    return false;
+  }
+}
+
 module.exports = async (req, res) => {
   // Allow only POST
   if (req.method !== 'POST') {
@@ -90,6 +118,16 @@ module.exports = async (req, res) => {
       mongoUriMasked: maskMongoUri(uri),
     });
 
+    // If USE_MONGO is not explicitly enabled or MONGO_URI missing, use fallback
+    if (String(process.env.USE_MONGO || '').toLowerCase() !== 'true' || !uri) {
+      const saved = await saveMessageFallback(contactDoc);
+      if (saved) {
+        return res.status(200).json({ success: true, message: 'Message saved (fallback - no Mongo configured).' });
+      } else {
+        throw new Error('Mongo not enabled and fallback save failed');
+      }
+    }
+
     const { db } = await connectToDatabase();
     const contacts = db.collection(collectionName);
     await contacts.insertOne(contactDoc);
@@ -100,6 +138,16 @@ module.exports = async (req, res) => {
       name: error && error.name ? error.name : undefined,
       stack: error && error.stack ? error.stack.split('\n').slice(0,5).join('\n') : undefined,
     });
+
+    // Try fallback save if Mongo failed at runtime
+    try {
+      const saved = await saveMessageFallback(contactDoc);
+      if (saved) {
+        return res.status(200).json({ success: true, message: 'Message saved (fallback after DB error).' });
+      }
+    } catch (e) {
+      console.error('Fallback save also failed:', e && e.message ? e.message : e);
+    }
 
     // If DEBUG_CONTACT=true in Vercel env, return detailed error (temporary for debugging only)
     if (String(process.env.DEBUG_CONTACT || '').toLowerCase() === 'true') {
