@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <title>Darmie Sison | Portfolio</title>
 </head>
 <body>
@@ -31,6 +32,10 @@
                     <li><a href="#certificates">Certificates</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <span class="theme-toggle-icon">☀️</span>
+                    <span class="theme-toggle-text">Light</span>
+                </button>
             </div>
         </nav>
 
@@ -141,7 +146,7 @@
                     </div>
                     <div class="project-card">
                         <div class="project-content">
-                            <h3 class="project-title"><span class="project-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="44" height="28" rx="4"/><circle cx="32" cy="32" r="8"/><rect x="20" y="10" width="12" height="8" rx="2"/><circle cx="48" cy="22" r="2"/></svg></span>Web-Based Face Filter</h3>
+                            <h3 class="project-title"><span class="project-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="44" height="28" rx="4"/><circle cx="32" cy="32" r="8"/><rect x="20" y="10" width="12" height="8" rx="2"/><circle cx="48" cy="22" r="2"/></svg></span>Glimzy</h3>
                             <p class="project-description">
                                 A human-computer interaction project that applies real-time filters to faces using web camera input.
                                 Blends computer vision techniques with an engaging user interface for interactive creativity.
@@ -151,6 +156,9 @@
                                 <span class="tech-badge">CSS</span>
                                 <span class="tech-badge">UX/UI</span>
                             </div>
+                             <a href="https://darmiesison.github.io/Glimzy/" target="_blank" class="project-link">
+                                Visit Project →
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -267,26 +275,73 @@
 
         <section id="contact" class="content-section reveal">
             <div class="section-container">
-                <h2 class="section-title">Contact Information</h2>
-                <div class="education-card reveal">
-                    <div class="education-content contact-content">
-                        <div class="education-details">
-                            <h3><span class="project-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M22 10h20l6 6-6 10-10 4-8-4-6-10z"/><path d="M34 34l10 10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M28 34l-10 10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span>Phone</h3>
-                            <p class="education-institution">+639944855474</p>
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid reveal">
+                    <div class="contact-panel">
+                        <div class="contact-header">
+                            <span class="contact-tag">Name Profiling</span>
+                            <h3>Send a message</h3>
+                            <p>Share your details below and I’ll get back to you soon.</p>
                         </div>
-                    </div><br>
-                    <div class="education-content contact-content">
-                        <div class="education-details">
-                            <h3><span class="project-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="18" width="44" height="28" rx="4"/><path d="M10 18l22 16 22-16" fill="none" stroke="currentColor" stroke-width="4"/></svg></span>Email</h3>
-                            <p class="education-institution">darmiesison@gmail.com</p>
-                        </div>
-                    </div><br>
-                    <div class="education-content contact-content">
-                        <div class="education-details">
-                            <h3><span class="project-icon"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 10a10 10 0 0 1 10 10c0 9.5-10 24-10 24S22 29.5 22 20a10 10 0 0 1 10-10z"/><circle cx="32" cy="20" r="4"/></svg></span>Location</h3>
-                            <p class="education-institution">Patac Santo Tomas La Union</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📛</span>
+                                <div>
+                                    <p class="detail-label">Name</p>
+                                    <p class="detail-value">Darmie Sison</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">✉️</span>
+                                <div>
+                                    <p class="detail-label">Email</p>
+                                    <p class="detail-value">darmiesison@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📱</span>
+                                <div>
+                                    <p class="detail-label">Contact No.</p>
+                                    <p class="detail-value">+639944855474</p>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">📍</span>
+                                <div>
+                                    <p class="detail-label">Location</p>
+                                    <p class="detail-value">Patac, Santo Tomas, La Union</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <form class="contact-form" method="post" action="#">
+                        <div class="form-head">
+                            <p class="form-title">Leave a message</p>
+                            <p class="form-subtitle">I’m ready to help with your next project.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input id="contact-name" name="name" type="text" placeholder="Your Name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input id="contact-email" name="email" type="email" placeholder="Your Email" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Contact No.</label>
+                            <input id="contact-phone" name="contactNo" type="tel" inputmode="numeric" pattern="\d{11}" maxlength="11" placeholder="09123456789" required />
+                            <small class="form-help">Enter exactly 11 digits, e.g. 09123456789</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message</button>
+                        <div class="submission-state hidden" id="submission-state">
+                            <p class="success-text">Message Sent Successfully</p>
+                            <button type="button" class="send-again-button" id="send-again-button">Send Message Again</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -310,24 +365,140 @@
     </div>
 
     <script>
-        // After 3 seconds, hide the splash and show the profile
-        setTimeout(() => {
-            document.getElementById('splash-screen').style.display = 'none';
-            document.getElementById('profile-container').style.display = 'flex';
-        }, 3000);
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const profileContainer = document.getElementById('profile-container');
 
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            function applyTheme(theme) {
+                document.body.dataset.theme = theme;
+                localStorage.setItem('theme', theme);
+
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('.theme-toggle-icon');
+                    const label = themeToggle.querySelector('.theme-toggle-text');
+
+                    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+                    if (label) label.textContent = theme === 'dark' ? 'Dark' : 'Light';
                 }
-            });
-        }, {
-            threshold: 0.15,
-        });
+            }
 
-        revealElements.forEach((el) => revealObserver.observe(el));
+            const savedTheme = localStorage.getItem('theme');
+            const preferredTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            applyTheme(savedTheme || preferredTheme);
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function () {
+                    const nextTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+                    applyTheme(nextTheme);
+                });
+            }
+
+            setTimeout(function () {
+                const splash = document.getElementById('splash-screen');
+                if (splash) splash.style.display = 'none';
+                if (profileContainer) profileContainer.style.display = 'flex';
+            }, 3000);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                });
+
+                revealElements.forEach(function (el) {
+                    revealObserver.observe(el);
+                });
+            } else {
+                revealElements.forEach(function (el) {
+                    el.classList.add('visible');
+                });
+            }
+
+            const contactForm = document.querySelector('.contact-form');
+            const submissionState = document.getElementById('submission-state');
+            const sendAgainButton = document.getElementById('send-again-button');
+            const submitButton = contactForm ? contactForm.querySelector('.submit-button') : null;
+            const successText = submissionState ? submissionState.querySelector('.success-text') : null;
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    if (!contactForm) return;
+
+                    if (submitButton) {
+                        submitButton.setAttribute('disabled', '');
+                        submitButton.textContent = 'Sending...';
+                    }
+
+                    const payload = {
+                        name: contactForm.name.value.trim(),
+                        email: contactForm.email.value.trim(),
+                        contactNo: contactForm.contactNo.value.trim(),
+                        message: contactForm.message.value.trim(),
+                    };
+
+                    if (!payload.email.includes('@')) {
+                        alert('Please enter a valid email address containing @.');
+                        if (submitButton) {
+                            submitButton.removeAttribute('disabled');
+                            submitButton.textContent = 'Send Message';
+                        }
+                        return;
+                    }
+
+                    if (!/^\d{11}$/.test(payload.contactNo)) {
+                        alert('Contact number must be exactly 11 digits and contain only numbers.');
+                        if (submitButton) {
+                            submitButton.removeAttribute('disabled');
+                            submitButton.textContent = 'Send Message';
+                        }
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload),
+                        });
+                        const result = await response.json();
+
+                        if (response.ok && result.success) {
+                            if (successText) successText.textContent = result.message || 'Message Sent Successfully';
+                            if (submissionState) submissionState.classList.remove('hidden');
+                            if (submitButton) submitButton.classList.add('hidden');
+                        } else {
+                            alert(result.message || 'Unable to send your message.');
+                        }
+                    } catch (error) {
+                        console.error('Contact form error:', error);
+                        alert('Unable to send your message. Please try again later.');
+                    } finally {
+                        if (submitButton) {
+                            submitButton.removeAttribute('disabled');
+                            submitButton.textContent = 'Send Message';
+                        }
+                    }
+                });
+            }
+
+            if (sendAgainButton) {
+                sendAgainButton.addEventListener('click', function () {
+                    if (contactForm) contactForm.reset();
+                    if (submissionState) submissionState.classList.add('hidden');
+                    if (submitButton) submitButton.classList.remove('hidden');
+                    var contactName = document.getElementById('contact-name');
+                    if (contactName) contactName.focus();
+                });
+            }
+        });
     </script>
 
 

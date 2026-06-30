@@ -1,0 +1,18 @@
+{
+  "name": "myprofile",
+  "version": "1.0.0",
+  "description": "Portfolio site with MongoDB Atlas contact form backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["portfolio", "contact-form", "mongodb", "atlas", "express"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^7.4.0"
+  }
+}
