@@ -1,6 +1,7 @@
 const { MongoClient } = require('mongodb');
 const fs = require('fs').promises;
 const path = require('path');
+const os = require('os');
 
 const uri = process.env.MONGO_URI;
 const dbName = process.env.MONGO_DB_NAME || 'Profiling';
@@ -54,7 +55,8 @@ async function connectToDatabase() {
 
 async function saveMessageFallback(contactDoc) {
   try {
-    const dataDir = path.join(__dirname, '..', 'data');
+    // Use the system temp directory for serverless-friendly writable location
+    const dataDir = path.join(os.tmpdir(), 'myprofile-data');
     const filePath = path.join(dataDir, 'contact-messages.json');
     await fs.mkdir(dataDir, { recursive: true });
 
